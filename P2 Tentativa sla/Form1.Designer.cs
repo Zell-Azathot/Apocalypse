@@ -42,6 +42,7 @@
             txtUsuario.Size = new Size(305, 23);
             txtUsuario.TabIndex = 0;
             txtUsuario.TextChanged += txtUsuario_TextChanged;
+            txtUsuario.KeyDown += txtUsuario_KeyDown;
             // 
             // txtSenha
             // 
@@ -50,6 +51,7 @@
             txtSenha.Size = new Size(305, 23);
             txtSenha.TabIndex = 1;
             txtSenha.TextChanged += txtSenha_TextChanged;
+            txtSenha.KeyDown += txtSenha_KeyDown;
             // 
             // button1
             // 
