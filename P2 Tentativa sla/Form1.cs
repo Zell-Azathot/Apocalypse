@@ -1,3 +1,5 @@
+using System.DirectoryServices.ActiveDirectory;
+
 namespace P2_Tentativa_sla
 {
     public partial class Form1 : Form
@@ -19,7 +21,12 @@ namespace P2_Tentativa_sla
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (txtUsuario.Text == "ADM" && txtSenha.Text == "123")
+            {
+                Form2 frm = new Form2();
+                frm.ShowDialog();
 
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
