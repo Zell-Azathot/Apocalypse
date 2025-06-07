@@ -27,6 +27,10 @@ namespace P2_Tentativa_sla
                 frm.ShowDialog();
 
             }
+            else
+            {
+                MessageBox.Show("Senha ou usuario incorreto");
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
