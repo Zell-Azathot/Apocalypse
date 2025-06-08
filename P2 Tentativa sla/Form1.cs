@@ -26,7 +26,7 @@ namespace P2_Tentativa_sla
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            validacao();
         }
 
         public void validacao()
@@ -36,7 +36,12 @@ namespace P2_Tentativa_sla
 
             if (string.IsNullOrEmpty(senha) || string.IsNullOrEmpty(usuario))
             {
-                MessageBox.Show("Todos os Campos devem ser preenchidos", "Erro", MessageBoxButtons.);
+                MessageBox.Show("Todos os Campos devem ser preenchidos", "Erro", MessageBoxButtons.OK);
+            }
+            if (usuario == "ADMIN" || senha == "123")
+            {
+                Form2 frm = new Form2();
+                frm.ShowDialog();
             }
         }
         private void Form1_Load(object sender, EventArgs e)
@@ -55,7 +60,7 @@ namespace P2_Tentativa_sla
 
         private void txtSenha_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape)
+            if (e.KeyCode == Keys.Enter)
             {
                 e.SuppressKeyPress = true;
                 button1.PerformClick();
