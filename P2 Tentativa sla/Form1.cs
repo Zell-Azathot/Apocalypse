@@ -7,11 +7,11 @@ namespace P2_Tentativa_sla
 {
     public partial class Form1 : Form
     {
-        string nome = "usuarios";
+
         public Form1()
         {
             InitializeComponent();
-            string caminhoCsv = Path.Combine(Application.StartupPath, nome);
+            
         }
 
         private void txtUsuario_TextChanged(object sender, EventArgs e)
@@ -33,16 +33,50 @@ namespace P2_Tentativa_sla
         {
             string usuario = txtUsuario.Text;
             string senha = txtSenha.Text;
+            string caminhoCsv = Path.Combine(Application.StartupPath, "usuarios.txt");
+            bool bingo = false;
 
             if (string.IsNullOrEmpty(senha) || string.IsNullOrEmpty(usuario))
             {
                 MessageBox.Show("Todos os Campos devem ser preenchidos", "Erro", MessageBoxButtons.OK);
             }
-            if (usuario == "ADMIN" || senha == "123")
+            if (usuario == "ADMIN" && senha == "123")
+            {
+                bingo = true;
+            }
+
+            if (!File.Exists(caminhoCsv))
+            {
+                File.WriteAllText(caminhoCsv, "usuario1,senha1" + Environment.NewLine);
+                MessageBox.Show("Deu errado tente de novo");
+                return;
+            }
+
+            string[] linhas = File.ReadAllLines(caminhoCsv);
+            bool VRmingo = false;
+
+            foreach (string line in linhas)
+            {
+                string[] dados = line.Split(",");
+
+                if (dados.Length == 2)
+                {
+                    string user = dados[0];
+                    string sen = dados[1];
+
+                    if (user == usuario && sen == senha)
+                    {
+                        VRmingo = true;
+                    }
+                }
+            }
+
+            if (VRmingo == true || bingo == true)
             {
                 Form2 frm = new Form2();
                 frm.ShowDialog();
             }
+            
         }
         private void Form1_Load(object sender, EventArgs e)
         {
