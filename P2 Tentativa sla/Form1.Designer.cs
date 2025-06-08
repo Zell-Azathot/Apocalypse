@@ -95,7 +95,7 @@
             Controls.Add(txtSenha);
             Controls.Add(txtUsuario);
             Name = "Form1";
-            Text = "Form1";
+            Text = "Se identifique ou Morra";
             Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();

@@ -28,83 +28,85 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            button4 = new Button();
+            btnClientes = new Button();
+            btnProdutos = new Button();
+            btnUsuarios = new Button();
+            btnPedidos = new Button();
             label1 = new Label();
             SuspendLayout();
             // 
-            // button1
+            // btnClientes
             // 
-            button1.Location = new Point(33, 99);
-            button1.Name = "button1";
-            button1.Size = new Size(127, 32);
-            button1.TabIndex = 0;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            btnClientes.Location = new Point(33, 99);
+            btnClientes.Name = "btnClientes";
+            btnClientes.Size = new Size(127, 32);
+            btnClientes.TabIndex = 0;
+            btnClientes.Text = "Cadastro de Clientes";
+            btnClientes.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnProdutos
             // 
-            button2.Location = new Point(33, 147);
-            button2.Name = "button2";
-            button2.Size = new Size(127, 32);
-            button2.TabIndex = 1;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
+            btnProdutos.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnProdutos.Location = new Point(33, 147);
+            btnProdutos.Name = "btnProdutos";
+            btnProdutos.Size = new Size(127, 32);
+            btnProdutos.TabIndex = 1;
+            btnProdutos.Text = "Cadastro de Produtos";
+            btnProdutos.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btnUsuarios
             // 
-            button3.Location = new Point(176, 99);
-            button3.Name = "button3";
-            button3.Size = new Size(127, 32);
-            button3.TabIndex = 2;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
+            btnUsuarios.Location = new Point(176, 99);
+            btnUsuarios.Name = "btnUsuarios";
+            btnUsuarios.Size = new Size(127, 32);
+            btnUsuarios.TabIndex = 2;
+            btnUsuarios.Text = "Cadastro de Usuários";
+            btnUsuarios.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // btnPedidos
             // 
-            button4.Location = new Point(176, 147);
-            button4.Name = "button4";
-            button4.Size = new Size(127, 32);
-            button4.TabIndex = 3;
-            button4.Text = "button4";
-            button4.UseVisualStyleBackColor = true;
+            btnPedidos.Location = new Point(176, 147);
+            btnPedidos.Name = "btnPedidos";
+            btnPedidos.Size = new Size(127, 32);
+            btnPedidos.TabIndex = 3;
+            btnPedidos.Text = "Cadastro de Pedidos";
+            btnPedidos.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
             label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(48, 31);
+            label1.Location = new Point(33, 25);
             label1.Name = "label1";
-            label1.Size = new Size(74, 15);
+            label1.Size = new Size(270, 50);
             label1.TabIndex = 4;
-            label1.Text = "Bem Vindo a";
+            label1.Text = "Bem Vindo a Yggdrasil escolha\r\no caminho a seguir.";
             // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(338, 229);
             Controls.Add(label1);
-            Controls.Add(button4);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btnPedidos);
+            Controls.Add(btnUsuarios);
+            Controls.Add(btnProdutos);
+            Controls.Add(btnClientes);
             ForeColor = Color.Black;
             Name = "Form2";
-            Text = "Form2";
+            Text = "Central de Portais";
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Button button1;
-        private Button button2;
-        private Button button3;
-        private Button button4;
+        private Button btnClientes;
+        private Button btnProdutos;
+        private Button btnUsuarios;
+        private Button btnPedidos;
         private Label label1;
     }
 }
