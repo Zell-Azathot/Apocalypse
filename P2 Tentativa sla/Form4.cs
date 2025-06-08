@@ -12,7 +12,7 @@ namespace P2_Tentativa_sla
 {
     public partial class Form4 : Form
     {
-        public static class sessao
+        public static class Sessao
         {
             public static string usuarioLog { get; set; } = string.Empty;
             public static bool ADMIN
@@ -27,7 +27,9 @@ namespace P2_Tentativa_sla
         {
             InitializeComponent();
 
-            if (sessao.ADMIN)
+            atualizardgv();
+
+            if (Sessao.ADMIN)
             {
                 this.Text = "Bem Vindo administrador";
             }
@@ -35,12 +37,12 @@ namespace P2_Tentativa_sla
             {
                 this.Text = "Olá Abençado da Yggdrasil";
                 label1.Text = "Nome de Usuario:";
-                txtUser.Text = sessao.usuarioLog;
+                txtUser.Text = Sessao.usuarioLog;
                 string[] linhas = File.ReadAllLines(caminhoCsv);
                 foreach (string line in linhas)
                 {
                     string[] partes = line.Split(",");
-                    if (partes[0] == sessao.usuarioLog)
+                    if (partes[0] == Sessao.usuarioLog)
                     {
                         txtSenha.Text = partes[1];
                     }
@@ -73,22 +75,122 @@ namespace P2_Tentativa_sla
 
         private void btnAlterar_Click(object sender, EventArgs e)
         {
+            string user = txtUser.Text.Trim();
+            string senha = txtSenha.Text.Trim();
 
+            if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(senha))
+            {
+                MessageBox.Show("Por favor não deixe os valores vazios, não gostamos deles aqui");
+            }
+            string[] linhas = File.ReadAllLines(caminhoCsv);
+            List<string> novasLinhas = new List<string>();
+
+            foreach (string linha in linhas)
+            {
+                string[] partes = linha.Split(",");
+                if (partes.Length >= 2 && partes[0] == user)
+                {
+                    novasLinhas.Add($"{user},{senha}");
+                }
+                else
+                {
+                    novasLinhas.Add(linha);
+                }
+            }
+
+            File.WriteAllLines(caminhoCsv, novasLinhas.ToArray());
+            MessageBox.Show("Atualizado com sucesso!");
+            atualizardgv();
+            txtUser.Text = "";
+            txtSenha.Text = "";
         }
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
+            string user = txtUser.Text.Trim();
 
+            string[] linhas = File.ReadAllLines(caminhoCsv);
+            List<string> novasLinhas = new List<string>();
+
+            foreach (string linha in linhas)
+            {
+                string[] partes = linha.Split(',');
+
+                if (partes.Length >= 2 && partes[0] != user)
+                    novasLinhas.Add(linha);
+            }
+
+            File.WriteAllLines(caminhoCsv, novasLinhas.ToArray());
+            MessageBox.Show("Usuário excluído com sucesso!");
+            atualizardgv();
+            txtUser.Text = "";
+            txtSenha.Text = "";
         }
 
         private void dgvCadastrar_Click(object sender, EventArgs e)
         {
+            string user = txtUser.Text.Trim();
+            string senha = txtSenha.Text.Trim();
 
+            if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(senha))
+            {
+                MessageBox.Show("Por favor não deixe os valores vazios, não gostamos deles aqui");
+            }
+
+            string[] linhas = File.ReadAllLines(caminhoCsv);
+            foreach (string linha in linhas)
+            {
+                string[] partes = linha.Split(',');
+
+                if (partes.Length >= 2 && partes[0] == user)
+                {
+                    MessageBox.Show("Duas pessoas com o mesmo nome? Isso não vai dar certo, escolha outro.");
+                }
+                using (StreamWriter sw = File.AppendText(caminhoCsv))
+                {
+                    sw.WriteLine($"{user},{senha}");
+                }
+
+                MessageBox.Show("Usuário cadastrado com sucesso!");
+            }
+
+            atualizardgv();
+            txtUser.Text = "";
+            txtSenha.Text = "";
         }
 
         private void dgvUsers_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex == 0)
+            {
+                txtSenha.Text = dgvUsers.Rows[e.RowIndex].Cells[1].Value?.ToString();
+                txtUser.Text = dgvUsers.Rows[e.RowIndex].Cells[0].Value?.ToString();
+            }
+        }
+        private void atualizardgv()
+        {
+            dgvUsers.Rows.Clear();
+            dgvUsers.Columns.Clear();
+            dgvUsers.Columns.Add("Usuario", "Usuário");
+            dgvUsers.Columns.Add("Senha", "Senha");
+            string[] linhas = File.ReadAllLines(caminhoCsv);
+            foreach (string line in linhas)
+            {
+                string[] partes = line.Split(",");
+                if (partes.Length > 0)
+                {
+                    dgvUsers.Rows.Add(partes[0], partes[1]);
+                }
+            }
+        }
 
+        private void txtUser_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                txtSenha.Focus();
+            }
         }
     }
 

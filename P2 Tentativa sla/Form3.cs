@@ -16,5 +16,18 @@ namespace P2_Tentativa_sla
         {
             InitializeComponent();
         }
+
+        string caminhoCsv = Path.Combine(Application.StartupPath, "clientes.txt");
+        if (!File.Exists(caminhoCsv))
+        {
+                File.WriteAllText(caminhoCsv, "ADMIN,123" + Environment.NewLine);
+        MessageBox.Show("infelizmente houve um erro, por favor tente de novo");
+                return;
+        }
+
+        private void Form3_Load(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

@@ -46,6 +46,7 @@
             txtUser.Size = new Size(331, 23);
             txtUser.TabIndex = 0;
             txtUser.TextChanged += txtUser_TextChanged;
+            txtUser.KeyDown += txtUser_KeyDown;
             // 
             // txtSenha
             // 
@@ -69,6 +70,7 @@
             // dgvUsers
             // 
             dgvUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvUsers.Enabled = false;
             dgvUsers.Location = new Point(173, 200);
             dgvUsers.Name = "dgvUsers";
             dgvUsers.Size = new Size(191, 183);

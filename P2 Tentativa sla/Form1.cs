@@ -2,6 +2,7 @@ using System.DirectoryServices.ActiveDirectory;
 using System;
 using System.IO;
 using System.Windows.Forms;
+using static P2_Tentativa_sla.Form4;
 
 namespace P2_Tentativa_sla
 {
@@ -65,10 +66,10 @@ namespace P2_Tentativa_sla
                     }
                 }
             }
+            Sessao.usuarioLog = usuario;
 
             if (VRmingo == true)
             {
-                sessao.usuarioLog = usuario;
                 Form2 frm = new Form2();
                 frm.ShowDialog();
             }

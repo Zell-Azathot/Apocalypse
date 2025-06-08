@@ -37,7 +37,8 @@
             BackColor = Color.Black;
             ClientSize = new Size(800, 450);
             Name = "Form3";
-            Text = "Form3";
+            Text = "Central de Clientes";
+            Load += Form3_Load;
             ResumeLayout(false);
         }
 
