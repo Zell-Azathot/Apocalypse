@@ -16,5 +16,29 @@ namespace P2_Tentativa_sla
         {
             InitializeComponent();
         }
+
+        private void btnClientes_Click(object sender, EventArgs e)
+        {
+            Form3 frm = new Form3();
+            frm.ShowDialog();
+        }
+
+        private void btnUsuarios_Click(object sender, EventArgs e)
+        {
+            Form4 frm = new Form4();
+            frm.ShowDialog();
+        }
+
+        private void btnProdutos_Click(object sender, EventArgs e)
+        {
+            Form5 frm = new Form5();
+            frm.ShowDialog();
+        }
+
+        private void btnPedidos_Click(object sender, EventArgs e)
+        {
+            Form6 frm = new Form6();
+            frm.ShowDialog();
+        }
     }
 }

@@ -34,21 +34,16 @@ namespace P2_Tentativa_sla
             string usuario = txtUsuario.Text;
             string senha = txtSenha.Text;
             string caminhoCsv = Path.Combine(Application.StartupPath, "usuarios.txt");
-            bool bingo = false;
-
+            
             if (string.IsNullOrEmpty(senha) || string.IsNullOrEmpty(usuario))
             {
                 MessageBox.Show("Todos os Campos devem ser preenchidos", "Erro", MessageBoxButtons.OK);
             }
-            if (usuario == "ADMIN" && senha == "123")
-            {
-                bingo = true;
-            }
-
+            
             if (!File.Exists(caminhoCsv))
             {
-                File.WriteAllText(caminhoCsv, "usuario1,senha1" + Environment.NewLine);
-                MessageBox.Show("Deu errado tente de novo");
+                File.WriteAllText(caminhoCsv, "ADMIN,123" + Environment.NewLine);
+                MessageBox.Show("infelizmente houve um erro, por favor tente de novo");
                 return;
             }
 
@@ -71,7 +66,7 @@ namespace P2_Tentativa_sla
                 }
             }
 
-            if (VRmingo == true || bingo == true)
+            if (VRmingo == true)
             {
                 Form2 frm = new Form2();
                 frm.ShowDialog();
