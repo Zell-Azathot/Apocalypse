@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Ka8U5D33kbo=",
+  "dgSpecHash": "6V19lMFt9lY=",
   "success": true,
   "projectFilePath": "C:\\Users\\Isabe\\source\\repos\\Apocalypse\\P2 Tentativa sla\\P2 Tentativa sla\\P2 Tentativa sla.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Isabe\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

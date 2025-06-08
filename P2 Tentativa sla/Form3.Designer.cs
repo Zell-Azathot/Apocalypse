@@ -316,7 +316,7 @@
             btnBuscarcep.TabIndex = 27;
             btnBuscarcep.Text = "Buscar CEP";
             btnBuscarcep.UseVisualStyleBackColor = true;
-            btnBuscarcep.Click += btnBuscarcep_Click;
+            btnBuscarcep.Click += btnBuscarcep_ClickAsync;
             // 
             // dataGridView1
             // 

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace P2_Tentativa_sla
 {
@@ -27,7 +28,19 @@ namespace P2_Tentativa_sla
             
         private void Form3_Load(object sender, EventArgs e)
         {
-
+            dataGridView1.ColumnCount = 11;
+            dataGridView1.Columns[0].Name = "Nome";
+            dataGridView1.Columns[1].Name = "CPF";
+            dataGridView1.Columns[2].Name = "Email";
+            dataGridView1.Columns[3].Name = "CEP";
+            dataGridView1.Columns[4].Name = "Logradouro";
+            dataGridView1.Columns[5].Name = "Número";
+            dataGridView1.Columns[6].Name = "Bairro";
+            dataGridView1.Columns[7].Name = "Cidade";
+            dataGridView1.Columns[8].Name = "Estado";
+            dataGridView1.Columns[9].Name = "Telefone";
+            dataGridView1.Columns[10].Name = "WhatsApp";
+            AtualizarGrid();
         }
 
         private void txtNome_TextChanged(object sender, EventArgs e)
@@ -87,17 +100,55 @@ namespace P2_Tentativa_sla
 
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-
+            string linha = $"{txtNome.Text},{txtCpf.Text},{txtEmail.Text},{txtCep.Text},{txtLogadouro.Text},{txtNumero.Text},{txtBairro.Text},{txtCidade.Text},{txtEstado.Text},{txtTelefone.Text},{txtWhatsapp.Text}";
+            File.AppendAllText(caminhoCsv, linha + Environment.NewLine);
+            MessageBox.Show("Cliente cadastrado com sucesso!");
         }
 
         private void btnAtualizar_Click(object sender, EventArgs e)
         {
+            string cpf = txtCpf.Text.Trim();
+            var linhas = File.ReadAllLines(caminhoCsv);
+            var novasLinhas = new List<string>();
 
+            foreach (string linha in linhas)
+            {
+                string[] partes = linha.Split(',');
+                if (partes[1] == cpf)
+                {
+                    string nova = $"{txtNome.Text},{txtCpf.Text},{txtEmail.Text},{txtCep.Text},{txtLogadouro.Text},{txtNumero.Text},{txtBairro.Text},{txtCidade.Text},{txtEstado.Text},{txtTelefone.Text},{txtWhatsapp.Text}";
+                    novasLinhas.Add(nova);
+                }
+                else
+                {
+                    novasLinhas.Add(linha);
+                }
+            }
+
+            File.WriteAllLines(caminhoCsv, novasLinhas);
+            MessageBox.Show("Cliente atualizado!");
+            AtualizarGrid();
+            LimparCampos();
         }
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
+            string cpf = txtCpf.Text.Trim();
+            var linhas = File.ReadAllLines(caminhoCsv);
+            var novasLinhas = new List<string>();
 
+            foreach(string linha in linhas)
+            {
+                string[] partes = linha.Split(',');
+                if (partes[1] != cpf)
+                {
+                    novasLinhas.Add(linha);
+                }
+            }
+            File.WriteAllLines(caminhoCsv, novasLinhas);
+            MessageBox.Show("Cliente excluído!");
+            AtualizarGrid();
+            LimparCampos();
         }
 
         private void btnBuscarcpf_Click(object sender, EventArgs e)
@@ -105,14 +156,119 @@ namespace P2_Tentativa_sla
 
         }
 
-        private void btnBuscarcep_Click(object sender, EventArgs e)
+        private async void btnBuscarcep_ClickAsync(object sender, EventArgs e)
         {
+            string cep = txtCep.Text.Trim();
 
+            if (!string.IsNullOrWhiteSpace(cep))
+            {
+                var endereco = await BuscarEndereco(cep);
+                if (endereco != null)
+                {
+                    txtLogadouro.Text = endereco.logradouro ?? "";
+                    txtBairro.Text = endereco.bairro ?? "";
+                    txtCidade.Text = endereco.localidade ?? "";
+                    txtEstado.Text = endereco.uf ?? "";
+                }
+                else
+                {
+                    MessageBox.Show("Não foi possível encontrar o endereço para esse CEP.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex >= 0)
+            {
+                var row = dataGridView1.Rows[e.RowIndex];
 
+                txtNome.Text = row?.Cells[0]?.Value?.ToString() ?? "";
+                txtCpf.Text = row?.Cells[1]?.Value?.ToString() ?? "";
+                txtEmail.Text = row?.Cells[2]?.Value?.ToString() ?? "";
+                txtCep.Text = row?.Cells[3]?.Value?.ToString() ?? "";
+                txtLogadouro.Text = row?.Cells[4]?.Value?.ToString() ?? "";
+                txtNumero.Text = row?.Cells[5]?.Value?.ToString() ?? "";
+                txtBairro.Text = row?.Cells[6]?.Value?.ToString() ?? "";
+                txtCidade.Text = row?.Cells[7]?.Value?.ToString() ?? "";
+                txtEstado.Text = row?.Cells[8]?.Value?.ToString() ?? "";
+                txtTelefone.Text = row?.Cells[9]?.Value?.ToString() ?? "";
+                txtWhatsapp.Text = row?.Cells[10]?.Value?.ToString() ?? "";
+            }
+        }
+
+        public class Endereco
+        {
+            public string logradouro { get; set; } = "";
+            public string bairro { get; set; } = "";
+            public string localidade { get; set; } = "";
+            public string uf { get; set; } = "";
+
+            public Endereco() { }
+
+            public Endereco(string logradouro, string bairro, string localidade, string uf)
+            {
+                this.logradouro = logradouro ?? throw new ArgumentNullException(nameof(logradouro));
+                this.bairro = bairro ?? throw new ArgumentNullException(nameof(bairro));
+                this.localidade = localidade ?? throw new ArgumentNullException(nameof(localidade));
+                this.uf = uf ?? throw new ArgumentNullException(nameof(uf));
+            }
+        }
+
+        private async Task<Endereco?> BuscarEndereco(string cep)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    string resposta = await client.GetStringAsync($"https://viacep.com.br/ws/{cep}/json/");
+                    if (resposta.Contains("\"erro\": true"))
+                    {
+                        MessageBox.Show("CEP não encontrado. Verifique o número digitado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return null;
+                    }
+                    var endereco = JsonConvert.DeserializeObject<Endereco>(resposta);
+
+                    return endereco;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro ao buscar o endereço: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null;
+                }
+            }   
+        }
+
+        private void AtualizarGrid()
+        {
+            dataGridView1.Rows.Clear();
+
+            if (!File.Exists(caminhoCsv)) return;
+
+            string[] linhas = File.ReadAllLines(caminhoCsv);
+
+            foreach (var linha in linhas)
+            {
+                string[] partes = linha.Split(',');
+
+                if (partes.Length >= 11)
+                    dataGridView1.Rows.Add(partes);
+            }
+        }
+
+        private void LimparCampos()
+        {
+            txtNome.Text = "";
+            txtCpf.Text = "";
+            txtEmail.Text = "";
+            txtCep.Text = "";
+            txtLogadouro.Text = "";
+            txtNumero.Text = "";
+            txtBairro.Text = "";
+            txtCidade.Text = "";
+            txtEstado.Text = "";
+            txtTelefone.Text = "";
+            txtWhatsapp.Text = "";
         }
     }
 }
