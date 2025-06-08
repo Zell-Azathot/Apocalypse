@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("P2 Tentativa sla")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fe383c5e460389a44f5900cf6fb5108c99bc1be6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3b825c6922c426da6c91eddc71563a6c2346016e")]
 [assembly: System.Reflection.AssemblyProductAttribute("P2 Tentativa sla")]
 [assembly: System.Reflection.AssemblyTitleAttribute("P2 Tentativa sla")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

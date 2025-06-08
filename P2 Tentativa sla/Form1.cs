@@ -34,7 +34,7 @@ namespace P2_Tentativa_sla
             string usuario = txtUsuario.Text;
             string senha = txtSenha.Text;
             string caminhoCsv = Path.Combine(Application.StartupPath, "usuarios.txt");
-            
+                        
             if (string.IsNullOrEmpty(senha) || string.IsNullOrEmpty(usuario))
             {
                 MessageBox.Show("Todos os Campos devem ser preenchidos", "Erro", MessageBoxButtons.OK);
@@ -68,6 +68,7 @@ namespace P2_Tentativa_sla
 
             if (VRmingo == true)
             {
+                sessao.usuarioLog = usuario;
                 Form2 frm = new Form2();
                 frm.ShowDialog();
             }
