@@ -66,6 +66,8 @@
             txtNome.Size = new Size(272, 23);
             txtNome.TabIndex = 0;
             txtNome.TextChanged += txtNome_TextChanged;
+            txtNome.KeyDown += txtNome_KeyDown;
+            txtNome.KeyPress += txtNome_KeyPress;
             // 
             // txtCpf
             // 
@@ -74,6 +76,7 @@
             txtCpf.Size = new Size(272, 23);
             txtCpf.TabIndex = 1;
             txtCpf.TextChanged += txtCpf_TextChanged;
+            txtCpf.KeyDown += txtCpf_KeyDown;
             // 
             // txtEmail
             // 
@@ -82,6 +85,7 @@
             txtEmail.Size = new Size(272, 23);
             txtEmail.TabIndex = 2;
             txtEmail.TextChanged += txtEmail_TextChanged;
+            txtEmail.KeyDown += txtEmail_KeyDown;
             // 
             // txtNumero
             // 
@@ -90,6 +94,7 @@
             txtNumero.Size = new Size(272, 23);
             txtNumero.TabIndex = 5;
             txtNumero.TextChanged += txtNumero_TextChanged;
+            txtNumero.KeyDown += txtNumero_KeyDown;
             // 
             // txtLogadouro
             // 
@@ -98,6 +103,7 @@
             txtLogadouro.Size = new Size(272, 23);
             txtLogadouro.TabIndex = 4;
             txtLogadouro.TextChanged += txtLogadouro_TextChanged;
+            txtLogadouro.KeyDown += txtLogadouro_KeyDown;
             // 
             // txtCep
             // 
@@ -106,6 +112,7 @@
             txtCep.Size = new Size(272, 23);
             txtCep.TabIndex = 3;
             txtCep.TextChanged += txtCep_TextChanged;
+            txtCep.KeyDown += txtCep_KeyDown;
             // 
             // txtEstado
             // 
@@ -114,6 +121,7 @@
             txtEstado.Size = new Size(272, 23);
             txtEstado.TabIndex = 8;
             txtEstado.TextChanged += txtEstado_TextChanged;
+            txtEstado.KeyDown += txtEstado_KeyDown;
             // 
             // txtCidade
             // 
@@ -122,6 +130,7 @@
             txtCidade.Size = new Size(272, 23);
             txtCidade.TabIndex = 7;
             txtCidade.TextChanged += txtCidade_TextChanged;
+            txtCidade.KeyDown += txtCidade_KeyDown;
             // 
             // txtBairro
             // 
@@ -130,6 +139,7 @@
             txtBairro.Size = new Size(272, 23);
             txtBairro.TabIndex = 6;
             txtBairro.TextChanged += txtBairro_TextChanged;
+            txtBairro.KeyDown += txtBairro_KeyDown;
             // 
             // txtTelefone
             // 
@@ -138,6 +148,7 @@
             txtTelefone.Size = new Size(272, 23);
             txtTelefone.TabIndex = 11;
             txtTelefone.TextChanged += txtTelefone_TextChanged;
+            txtTelefone.KeyDown += txtTelefone_KeyDown;
             // 
             // txtWhatsapp
             // 

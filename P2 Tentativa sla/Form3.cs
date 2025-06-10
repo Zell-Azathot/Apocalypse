@@ -18,14 +18,14 @@ namespace P2_Tentativa_sla
         public Form3()
         {
             InitializeComponent();
-            
+
             if (!File.Exists(caminhoCsv))
             {
                 File.WriteAllText(caminhoCsv, "" + Environment.NewLine);
                 return;
             }
         }
-            
+
         private void Form3_Load(object sender, EventArgs e)
         {
             dataGridView1.ColumnCount = 11;
@@ -114,7 +114,7 @@ namespace P2_Tentativa_sla
             foreach (string linha in linhas)
             {
                 string[] partes = linha.Split(',');
-                if (partes[1] == cpf)
+                if (partes.Length >= 2 && partes[1] == cpf)
                 {
                     string nova = $"{txtNome.Text},{txtCpf.Text},{txtEmail.Text},{txtCep.Text},{txtLogadouro.Text},{txtNumero.Text},{txtBairro.Text},{txtCidade.Text},{txtEstado.Text},{txtTelefone.Text},{txtWhatsapp.Text}";
                     novasLinhas.Add(nova);
@@ -137,10 +137,10 @@ namespace P2_Tentativa_sla
             var linhas = File.ReadAllLines(caminhoCsv);
             var novasLinhas = new List<string>();
 
-            foreach(string linha in linhas)
+            foreach (string linha in linhas)
             {
                 string[] partes = linha.Split(',');
-                if (partes[1] != cpf)
+                if (partes.Length >= 2 && partes[1] != cpf)
                 {
                     novasLinhas.Add(linha);
                 }
@@ -153,7 +153,35 @@ namespace P2_Tentativa_sla
 
         private void btnBuscarcpf_Click(object sender, EventArgs e)
         {
+            string cpf = txtCpf.Text.Trim();
+            var linhas = File.ReadAllLines(caminhoCsv);
 
+            foreach (string linha in linhas)
+            {
+                string[] partes = linha.Split(',');
+                if (partes[1] == cpf)
+                {
+                    txtNome.Text = partes[0];
+                    txtCpf.Text = partes[1];
+                    txtEmail.Text = partes[2];
+                    txtCep.Text = partes[3];
+                    txtLogadouro.Text = partes[4];
+                    txtNumero.Text = partes[5];
+                    txtBairro.Text = partes[6];
+                    txtCidade.Text = partes[7];
+                    txtEstado.Text = partes[8];
+                    txtTelefone.Text = partes[9];
+                    txtWhatsapp.Text = partes[10];
+                }
+                if (string.IsNullOrEmpty(cpf))
+                {
+                    MessageBox.Show("Você não digitou um cpf para ser buscado no sistema.");
+                }
+                if (partes[1] != cpf)
+                {
+                    MessageBox.Show("O cpf digitado não está registrado no nosso sistema.");
+                }
+            }
         }
 
         private async void btnBuscarcep_ClickAsync(object sender, EventArgs e)
@@ -203,16 +231,6 @@ namespace P2_Tentativa_sla
             public string bairro { get; set; } = "";
             public string localidade { get; set; } = "";
             public string uf { get; set; } = "";
-
-            public Endereco() { }
-
-            public Endereco(string logradouro, string bairro, string localidade, string uf)
-            {
-                this.logradouro = logradouro ?? throw new ArgumentNullException(nameof(logradouro));
-                this.bairro = bairro ?? throw new ArgumentNullException(nameof(bairro));
-                this.localidade = localidade ?? throw new ArgumentNullException(nameof(localidade));
-                this.uf = uf ?? throw new ArgumentNullException(nameof(uf));
-            }
         }
 
         private async Task<Endereco?> BuscarEndereco(string cep)
@@ -236,7 +254,7 @@ namespace P2_Tentativa_sla
                     MessageBox.Show("Erro ao buscar o endereço: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return null;
                 }
-            }   
+            }
         }
 
         private void AtualizarGrid()
@@ -269,6 +287,101 @@ namespace P2_Tentativa_sla
             txtEstado.Text = "";
             txtTelefone.Text = "";
             txtWhatsapp.Text = "";
+        }
+
+        private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void txtNome_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                txtCpf.Focus();
+            }
+        }
+
+        private void txtCpf_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                txtEmail.Focus();
+            }
+        }
+
+        private void txtEmail_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                txtCep.Focus();
+            }
+        }
+
+        private void txtCep_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                txtLogadouro.Focus();
+            }
+        }
+
+        private void txtLogadouro_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                txtNumero.Focus();
+            }
+        }
+
+        private void txtNumero_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                txtBairro.Focus();
+            }
+        }
+
+        private void txtBairro_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                txtCidade.Focus();
+            }
+        }
+
+        private void txtCidade_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                txtEstado.Focus();
+            }
+        }
+
+        private void txtEstado_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                txtTelefone.Focus();
+            }
+        }
+
+        private void txtTelefone_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                txtWhatsapp.Focus();
+            }
         }
     }
 }
