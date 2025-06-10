@@ -53,6 +53,9 @@ namespace P2_Tentativa_sla
             string linha = $"{txtNome.Text},{txtPreco},{txtDescrição}";
             File.AppendAllText(caminhoCsv, linha + Environment.NewLine);
             MessageBox.Show("Produto Salvo com sucesso!");
+            AtualizarGrid();
+            LimparCampos();
+
         }
 
         private void btnAlterar_Click(object sender, EventArgs e)
@@ -76,12 +79,29 @@ namespace P2_Tentativa_sla
             }
 
             File.WriteAllLines(caminhoCsv, novasLinhas);
-            MessageBox.Show("Produto atualizado atualizado!");
+            MessageBox.Show("Produto atualizado!");
+            AtualizarGrid();
+            LimparCampos();
         }
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
+            string cpf = txtNome.Text.Trim();
+            var linhas = File.ReadAllLines(caminhoCsv);
+            var novasLinhas = new List<string>();
 
+            foreach (string linha in linhas)
+            {
+                string[] partes = linha.Split(',');
+                if (partes.Length >= 2 && partes[1] != cpf)
+                {
+                    novasLinhas.Add(linha);
+                }
+            }
+            File.WriteAllLines(caminhoCsv, novasLinhas);
+            MessageBox.Show("Produto excluído!");
+            AtualizarGrid();
+            LimparCampos();
         }
 
         private void txtNome_TextChanged(object sender, EventArgs e)
@@ -91,7 +111,51 @@ namespace P2_Tentativa_sla
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+            string name = txtNome.Text.Trim();
+            var linhas = File.ReadAllLines(caminhoCsv);
 
+            foreach (string linha in linhas)
+            {
+                string[] partes = linha.Split(',');
+                if (partes[0] == name)
+                {
+                    txtNome.Text = partes[0];
+                    txtPreco.Text = partes[1];
+                    txtDescrição.Text = partes[2];
+                }
+                if (string.IsNullOrEmpty(name))
+                {
+                    MessageBox.Show("Você não digitou um Nome para ser buscado no sistema.");
+                }
+                if (partes[1] != name)
+                {
+                    MessageBox.Show("O Produto digitado não está registrado no nosso sistema.");
+                }
+            }
+        }
+
+        private void LimparCampos()
+        {
+            txtNome.Text = "";
+            txtPreco.Text = "";
+            txtDescrição.Text = "";
+        }
+
+        private void AtualizarGrid()
+        {
+            dataGridView1.Rows.Clear();
+
+            if (!File.Exists(caminhoCsv)) return;
+
+            string[] linhas = File.ReadAllLines(caminhoCsv);
+
+            foreach (var linha in linhas)
+            {
+                string[] partes = linha.Split(',');
+
+                if (partes.Length >= 3)
+                    dataGridView1.Rows.Add(partes);
+            }
         }
     }
 }
