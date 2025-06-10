@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace P2_Tentativa_sla
 {
@@ -50,7 +51,7 @@ namespace P2_Tentativa_sla
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            string linha = $"{txtNome.Text},{txtPreco},{txtDescrição}";
+            string linha = $"{txtNome.Text},{txtPreco.Text},{txtDescrição.Text}";
             File.AppendAllText(caminhoCsv, linha + Environment.NewLine);
             MessageBox.Show("Produto Salvo com sucesso!");
             AtualizarGrid();
@@ -63,7 +64,7 @@ namespace P2_Tentativa_sla
             string nome = txtNome.Text.Trim();
             var linhas = File.ReadAllLines(caminhoCsv);
             var novasLinhas = new List<string>();
-
+            
             foreach (string linha in linhas)
             {
                 string[] partes = linha.Split(',');
@@ -71,6 +72,11 @@ namespace P2_Tentativa_sla
                 {
                     string nova = $"{txtNome.Text},{txtPreco},{txtDescrição}";
                     novasLinhas.Add(nova);
+                }
+                if (partes[0] == nome)
+                {
+                    MessageBox.Show("Este produto já esta cadastrado em nosso sistema, por favor digite outro Nome.");
+                    return;
                 }
                 else
                 {
@@ -126,10 +132,12 @@ namespace P2_Tentativa_sla
                 if (string.IsNullOrEmpty(name))
                 {
                     MessageBox.Show("Você não digitou um Nome para ser buscado no sistema.");
+                    return;
                 }
                 if (partes[1] != name)
                 {
                     MessageBox.Show("O Produto digitado não está registrado no nosso sistema.");
+                    return;
                 }
             }
         }
@@ -157,5 +165,6 @@ namespace P2_Tentativa_sla
                     dataGridView1.Rows.Add(partes);
             }
         }
+        // o botão de excluir não ta funcionando, e a confirmação para não escrever o mesmo nome tambem não.
     }
 }
