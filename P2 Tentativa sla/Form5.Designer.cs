@@ -35,6 +35,10 @@
             label3 = new Label();
             txtDescrição = new TextBox();
             dataGridView1 = new DataGridView();
+            btnSalvar = new Button();
+            btnAlterar = new Button();
+            btnExcluir = new Button();
+            btnBuscar = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -44,7 +48,7 @@
             txtNome.Name = "txtNome";
             txtNome.Size = new Size(229, 23);
             txtNome.TabIndex = 0;
-            txtNome.TextChanged += textBox1_TextChanged;
+            txtNome.TextChanged += txtNome_TextChanged;
             // 
             // txtPreco
             // 
@@ -101,12 +105,56 @@
             dataGridView1.TabIndex = 7;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
+            // btnSalvar
+            // 
+            btnSalvar.Location = new Point(273, 46);
+            btnSalvar.Name = "btnSalvar";
+            btnSalvar.Size = new Size(105, 23);
+            btnSalvar.TabIndex = 8;
+            btnSalvar.Text = "Salvar";
+            btnSalvar.UseVisualStyleBackColor = true;
+            btnSalvar.Click += btnSalvar_Click;
+            // 
+            // btnAlterar
+            // 
+            btnAlterar.Location = new Point(273, 75);
+            btnAlterar.Name = "btnAlterar";
+            btnAlterar.Size = new Size(105, 23);
+            btnAlterar.TabIndex = 9;
+            btnAlterar.Text = "Alterar";
+            btnAlterar.UseVisualStyleBackColor = true;
+            btnAlterar.Click += btnAlterar_Click;
+            // 
+            // btnExcluir
+            // 
+            btnExcluir.Location = new Point(273, 104);
+            btnExcluir.Name = "btnExcluir";
+            btnExcluir.Size = new Size(105, 23);
+            btnExcluir.TabIndex = 10;
+            btnExcluir.Text = "Excluir";
+            btnExcluir.UseVisualStyleBackColor = true;
+            btnExcluir.Click += btnExcluir_Click;
+            // 
+            // btnBuscar
+            // 
+            btnBuscar.Location = new Point(273, 134);
+            btnBuscar.Name = "btnBuscar";
+            btnBuscar.Size = new Size(105, 23);
+            btnBuscar.TabIndex = 11;
+            btnBuscar.Text = "Buscar Nome";
+            btnBuscar.UseVisualStyleBackColor = true;
+            btnBuscar.Click += btnBuscar_Click;
+            // 
             // Form5
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnBuscar);
+            Controls.Add(btnExcluir);
+            Controls.Add(btnAlterar);
+            Controls.Add(btnSalvar);
             Controls.Add(dataGridView1);
             Controls.Add(txtDescrição);
             Controls.Add(label3);
@@ -131,5 +179,9 @@
         private Label label3;
         private TextBox txtDescrição;
         private DataGridView dataGridView1;
+        private Button btnSalvar;
+        private Button btnAlterar;
+        private Button btnExcluir;
+        private Button btnBuscar;
     }
 }
