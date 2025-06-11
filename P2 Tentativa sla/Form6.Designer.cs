@@ -28,12 +28,56 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form6";
+            label1 = new Label();
+            txtCPF = new TextBox();
+            button1 = new Button();
+            SuspendLayout();
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.ForeColor = SystemColors.Control;
+            label1.Location = new Point(21, 16);
+            label1.Name = "label1";
+            label1.Size = new Size(130, 15);
+            label1.TabIndex = 0;
+            label1.Text = "Digite o Cpf do Cliente:\r\n";
+            // 
+            // txtCPF
+            // 
+            txtCPF.Location = new Point(21, 34);
+            txtCPF.Name = "txtCPF";
+            txtCPF.Size = new Size(269, 23);
+            txtCPF.TabIndex = 1;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(296, 33);
+            button1.Name = "button1";
+            button1.Size = new Size(89, 22);
+            button1.TabIndex = 2;
+            button1.Text = "Buscar cliente";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // Form6
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Black;
+            ClientSize = new Size(800, 450);
+            Controls.Add(button1);
+            Controls.Add(txtCPF);
+            Controls.Add(label1);
+            Name = "Form6";
+            Text = "Form6";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private Label label1;
+        private TextBox txtCPF;
+        private Button button1;
     }
 }

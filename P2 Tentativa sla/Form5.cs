@@ -32,6 +32,7 @@ namespace P2_Tentativa_sla
             dataGridView1.Columns[0].Name = "Nome do Produto";
             dataGridView1.Columns[1].Name = "Preço do Produto";
             dataGridView1.Columns[2].Name = "Descrição do Produto";
+            AtualizarGrid();
         }
 
         private void txtPreco_TextChanged(object sender, EventArgs e)
@@ -51,8 +52,20 @@ namespace P2_Tentativa_sla
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            string linha = $"{txtNome.Text},{txtPreco.Text},{txtDescrição.Text}";
-            File.AppendAllText(caminhoCsv, linha + Environment.NewLine);
+            string[] linhas = File.ReadAllLines(caminhoCsv);
+            string nome = txtNome.Text;
+
+            foreach (string linha in linhas)
+            {
+                string[] partes = linha.Split(',');
+                if (partes.Length > 0 && partes[0] == nome)
+                {
+                    MessageBox.Show("Este produto já esta cadastrado em nosso sistema, por favor digite outro Nome.");
+                    return;
+                }
+            }
+            string lin = $"{txtNome.Text},{txtPreco.Text},{txtDescrição.Text}";
+            File.AppendAllText(caminhoCsv, lin + Environment.NewLine);
             MessageBox.Show("Produto Salvo com sucesso!");
             AtualizarGrid();
             LimparCampos();
@@ -64,11 +77,11 @@ namespace P2_Tentativa_sla
             string nome = txtNome.Text.Trim();
             var linhas = File.ReadAllLines(caminhoCsv);
             var novasLinhas = new List<string>();
-            
+
             foreach (string linha in linhas)
             {
                 string[] partes = linha.Split(',');
-                if (partes.Length >= 2 && partes[1] == nome)
+                if (partes.Length >= 2 && partes[0] == nome)
                 {
                     string nova = $"{txtNome.Text},{txtPreco},{txtDescrição}";
                     novasLinhas.Add(nova);
@@ -92,14 +105,14 @@ namespace P2_Tentativa_sla
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
-            string cpf = txtNome.Text.Trim();
+            string nome = txtNome.Text.Trim();
             var linhas = File.ReadAllLines(caminhoCsv);
             var novasLinhas = new List<string>();
 
             foreach (string linha in linhas)
             {
                 string[] partes = linha.Split(',');
-                if (partes.Length >= 2 && partes[1] != cpf)
+                if (partes.Length >= 2 && partes[0] != nome)
                 {
                     novasLinhas.Add(linha);
                 }
@@ -134,7 +147,7 @@ namespace P2_Tentativa_sla
                     MessageBox.Show("Você não digitou um Nome para ser buscado no sistema.");
                     return;
                 }
-                if (partes[1] != name)
+                if (partes[0] != name)
                 {
                     MessageBox.Show("O Produto digitado não está registrado no nosso sistema.");
                     return;
@@ -163,6 +176,24 @@ namespace P2_Tentativa_sla
 
                 if (partes.Length >= 3)
                     dataGridView1.Rows.Add(partes);
+            }
+        }
+
+        private void txtNome_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                txtPreco.Focus();
+            }
+        }
+
+        private void txtPreco_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                txtDescrição.Focus();
             }
         }
         // o botão de excluir não ta funcionando, e a confirmação para não escrever o mesmo nome tambem não.

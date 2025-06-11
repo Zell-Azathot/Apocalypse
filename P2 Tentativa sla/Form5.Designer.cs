@@ -49,6 +49,7 @@
             txtNome.Size = new Size(229, 23);
             txtNome.TabIndex = 0;
             txtNome.TextChanged += txtNome_TextChanged;
+            txtNome.KeyDown += txtNome_KeyDown;
             // 
             // txtPreco
             // 
@@ -57,6 +58,7 @@
             txtPreco.Size = new Size(229, 23);
             txtPreco.TabIndex = 1;
             txtPreco.TextChanged += txtPreco_TextChanged;
+            txtPreco.KeyDown += txtPreco_KeyDown;
             // 
             // label1
             // 
@@ -151,7 +153,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(400, 450);
             Controls.Add(btnBuscar);
             Controls.Add(btnExcluir);
             Controls.Add(btnAlterar);
