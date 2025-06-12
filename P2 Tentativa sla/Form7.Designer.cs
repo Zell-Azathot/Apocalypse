@@ -28,12 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form7";
+            btnAtualziar = new Button();
+            textBox1 = new TextBox();
+            SuspendLayout();
+            // 
+            // btnAtualziar
+            // 
+            btnAtualziar.Location = new Point(12, 412);
+            btnAtualziar.Name = "btnAtualziar";
+            btnAtualziar.Size = new Size(122, 26);
+            btnAtualziar.TabIndex = 1;
+            btnAtualziar.Text = "Atualizar Alterações";
+            btnAtualziar.UseVisualStyleBackColor = true;
+            btnAtualziar.Click += btnAtualziar_Click;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(3, 2);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(794, 404);
+            textBox1.TabIndex = 2;
+            textBox1.TextChanged += textBox1_TextChanged;
+            // 
+            // Form7
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Black;
+            ClientSize = new Size(800, 450);
+            Controls.Add(textBox1);
+            Controls.Add(btnAtualziar);
+            Name = "Form7";
+            Text = "Form7";
+            Load += Form7_Load;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+        private Button btnAtualziar;
+        private TextBox textBox1;
     }
 }

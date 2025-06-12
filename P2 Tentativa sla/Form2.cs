@@ -40,5 +40,11 @@ namespace P2_Tentativa_sla
             Form6 frm = new Form6();
             frm.ShowDialog();
         }
+
+        private void btn5_Click(object sender, EventArgs e)
+        {
+            Form7 frm = new Form7();
+            frm.ShowDialog();
+        }
     }
 }

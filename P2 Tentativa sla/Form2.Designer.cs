@@ -33,6 +33,7 @@
             btnUsuarios = new Button();
             btnPedidos = new Button();
             label1 = new Label();
+            btn5 = new Button();
             SuspendLayout();
             // 
             // btnClientes
@@ -48,7 +49,7 @@
             // btnProdutos
             // 
             btnProdutos.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnProdutos.Location = new Point(33, 147);
+            btnProdutos.Location = new Point(176, 99);
             btnProdutos.Name = "btnProdutos";
             btnProdutos.Size = new Size(127, 32);
             btnProdutos.TabIndex = 1;
@@ -58,7 +59,7 @@
             // 
             // btnUsuarios
             // 
-            btnUsuarios.Location = new Point(176, 99);
+            btnUsuarios.Location = new Point(33, 147);
             btnUsuarios.Name = "btnUsuarios";
             btnUsuarios.Size = new Size(127, 32);
             btnUsuarios.TabIndex = 2;
@@ -87,12 +88,23 @@
             label1.TabIndex = 4;
             label1.Text = "Bem Vindo a Yggdrasil escolha\r\no caminho a seguir.";
             // 
+            // btn5
+            // 
+            btn5.Location = new Point(67, 185);
+            btn5.Name = "btn5";
+            btn5.Size = new Size(202, 32);
+            btn5.TabIndex = 5;
+            btn5.Text = "Visualização e Edição de Pedidos";
+            btn5.UseVisualStyleBackColor = true;
+            btn5.Click += btn5_Click;
+            // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(338, 229);
+            Controls.Add(btn5);
             Controls.Add(label1);
             Controls.Add(btnPedidos);
             Controls.Add(btnUsuarios);
@@ -112,5 +124,6 @@
         private Button btnUsuarios;
         private Button btnPedidos;
         private Label label1;
+        private Button btn5;
     }
 }
