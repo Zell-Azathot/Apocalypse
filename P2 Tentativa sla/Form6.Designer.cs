@@ -44,6 +44,7 @@
             txtPrecoTotal = new TextBox();
             label6 = new Label();
             button1 = new Button();
+            btnAdicionarProduto = new Button();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -174,7 +175,7 @@
             txtPrecoTotal.Location = new Point(21, 316);
             txtPrecoTotal.Name = "txtPrecoTotal";
             txtPrecoTotal.ReadOnly = true;
-            txtPrecoTotal.Size = new Size(269, 23);
+            txtPrecoTotal.Size = new Size(145, 23);
             txtPrecoTotal.TabIndex = 15;
             txtPrecoTotal.TextChanged += txtPrecoTotal_TextChanged;
             // 
@@ -190,12 +191,22 @@
             // 
             // button1
             // 
-            button1.Location = new Point(21, 369);
+            button1.Location = new Point(16, 380);
             button1.Name = "button1";
             button1.Size = new Size(108, 22);
             button1.TabIndex = 16;
-            button1.Text = "Adicionar";
+            button1.Text = "Adicionar Cliente";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // btnAdicionarProduto
+            // 
+            btnAdicionarProduto.Location = new Point(172, 315);
+            btnAdicionarProduto.Name = "btnAdicionarProduto";
+            btnAdicionarProduto.Size = new Size(118, 22);
+            btnAdicionarProduto.TabIndex = 17;
+            btnAdicionarProduto.Text = "Adicionar Produto";
+            btnAdicionarProduto.UseVisualStyleBackColor = true;
             // 
             // Form6
             // 
@@ -203,6 +214,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnAdicionarProduto);
             Controls.Add(button1);
             Controls.Add(txtPrecoTotal);
             Controls.Add(label6);
@@ -221,6 +233,7 @@
             Controls.Add(label1);
             Name = "Form6";
             Text = "Form6";
+            Load += Form6_Load;
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
@@ -245,5 +258,6 @@
         private TextBox txtPrecoTotal;
         private Label label6;
         private Button button1;
+        private Button btnAdicionarProduto;
     }
 }
