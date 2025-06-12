@@ -22,14 +22,18 @@ namespace P2_Tentativa_sla
 
         private void btnAtualziar_Click(object sender, EventArgs e)
         {
-            string linhas = textBox1.Text;
-            File.WriteAllLines(caminhoCsv, linhas);
+            var ming = textBox1.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            File.WriteAllLines(caminhoCsv, ming);
             MessageBox.Show("Arquivo atualizado com sucesso!");
         }
 
         private void Form7_Load(object sender, EventArgs e)
         {
-
+            if (File.Exists(caminhoCsv))
+            {
+                string[] linhas = File.ReadAllLines(caminhoCsv);
+                textBox1.Lines = linhas;
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

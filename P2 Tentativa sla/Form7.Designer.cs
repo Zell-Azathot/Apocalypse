@@ -44,6 +44,8 @@
             // 
             // textBox1
             // 
+            textBox1.BackColor = Color.Black;
+            textBox1.ForeColor = Color.White;
             textBox1.Location = new Point(3, 2);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";

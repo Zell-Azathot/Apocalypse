@@ -151,6 +151,9 @@ namespace P2_Tentativa_sla
             dataGridView1.Columns[2].Name = "Nome do Produto";
             dataGridView1.Columns[3].Name = "Quantidade do Produto";
             dataGridView1.Columns[4].Name = "Preço total do Produto";
+            txtNome.ReadOnly = true;
+            txtPreco.ReadOnly = true;
+            txtPrecoTotal.ReadOnly = true;
             
         }
 
