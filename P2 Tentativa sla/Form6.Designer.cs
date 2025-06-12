@@ -207,6 +207,7 @@
             btnAdicionarProduto.TabIndex = 17;
             btnAdicionarProduto.Text = "Adicionar Produto";
             btnAdicionarProduto.UseVisualStyleBackColor = true;
+            btnAdicionarProduto.Click += btnAdicionarProduto_Click;
             // 
             // Form6
             // 

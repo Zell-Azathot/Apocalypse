@@ -103,7 +103,9 @@ namespace P2_Tentativa_sla
             string linha = $"{txtNome.Text},{txtCpf.Text},{txtEmail.Text},{txtCep.Text},{txtLogadouro.Text},{txtNumero.Text},{txtBairro.Text},{txtCidade.Text},{txtEstado.Text},{txtTelefone.Text},{txtWhatsapp.Text}";
             File.AppendAllText(caminhoCsv, linha + Environment.NewLine);
             MessageBox.Show("Cliente cadastrado com sucesso!");
+            AtualizarGrid();
         }
+
 
         private void btnAtualizar_Click(object sender, EventArgs e)
         {
